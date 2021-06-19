@@ -1,0 +1,17 @@
+input, select{
+  margin: 1%;
+  border: solid 1px $dark-blue;
+  background-color: $background;
+  padding: 0.5% 1% 0.5% 1%;
+  width: 300px;
+  color: $dark-blue;
+}
+
+.buttons{
+  float: right;
+}
+
+label{
+  width: 150px;
+  color: $dark-blue;
+}

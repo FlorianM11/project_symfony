@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+    {{ form_row(form.lastName, { 'label': 'Nom' }) }}
+    {{ form_row(form.firstName, { 'label': 'Prénom' }) }}
+    {{ form_row(form.email, { 'label': 'Email' }) }}
+    {{ form_row(form.phone, { 'label': 'Numéro de téléphone' }) }}
+    {{ form_row(form.dateOfBirth, { 'label': 'Date de naissance' }) }}
+
+    <div class="buttons">
+        <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        <a class="btn btn-secondary" href="{{ path('tenant_index') }}">Retour</a>
+    </div>
+
+{{ form_end(form) }}

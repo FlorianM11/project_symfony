@@ -32,6 +32,11 @@ class Address
      */
     private $city;
 
+    public function __toString()
+    {
+        return $this->getAddress() . ', ' . $this->getPostalCode() . ' ' . $this->getCity();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,48 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}Mes locations{% endblock %}
+
+{% block content %}
+
+    <div class="d-flex align-items-center mb-5 justify-content-between">
+        <h1>Mes locations</h1>
+        <a class="btn btn-primary" href="{{ path('lease_new') }}">Ajouter une location</a>
+    </div>
+
+    <div class="block">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>StartDate</th>
+                    <th>EndDate</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for lease in leases %}
+                <tr>
+                    <td>{{ lease.id }}</td>
+                    <td>{{ lease.startDate ? lease.startDate|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ lease.endDate ? lease.endDate|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ path('lease_show', {'id': lease.id}) }}">Afficher</a></li>
+                                <li><a class="dropdown-item" href="{{ path('lease_edit', {'id': lease.id}) }}">Modifier</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">Aucun résultat trouvé...</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

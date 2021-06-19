@@ -1,0 +1,49 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center mb-5 justify-content-between">
+        <h1>Mes adresses</h1>
+        <a class="btn btn-primary" href="{{ path('address_new') }}">Ajouter une adresse</a>
+    </div>
+
+    <div class="block">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Adresse</th>
+                    <th>Code postale</th>
+                    <th>Ville</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for address in addresses %}
+                <tr>
+                    <td>{{ address.id }}</td>
+                    <td>{{ address.address }}</td>
+                    <td>{{ address.postalCode }}</td>
+                    <td>{{ address.city }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ path('address_show', {'id': address.id}) }}">Afficher</a></li>
+                                <li><a class="dropdown-item" href="{{ path('address_edit', {'id': address.id}) }}">Modifier</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="text-center" colspan="5">Aucun résultat trouvé..</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

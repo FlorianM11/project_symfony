@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+        {{ form_row(form.reference, { 'label': 'Référence' }) }}
+        {{ form_row(form.area, { 'label': 'Surface' }) }}
+        {{ form_row(form.rent, { 'label': 'Loyer (en €)' }) }}
+        {{ form_row(form.type, { 'label': 'Type' }) }}
+        {{ form_row(form.address, { 'label': 'Adresse' }) }}
+    <div class="buttons">
+        <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        <a class="btn btn-secondary" href="{{ path('property_index') }}">Retour</a>
+    </div>
+
+{{ form_end(form) }}

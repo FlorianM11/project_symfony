@@ -1,0 +1,45 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}Mes types{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center mb-5 justify-content-between">
+        <h1>Mes types</h1>
+        <a class="btn btn-primary" href="{{ path('type_new') }}">Ajouter un type</a>
+    </div>
+
+    <div class="block">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Libelle</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for type in types %}
+                <tr>
+                    <td>{{ type.id }}</td>
+                    <td>{{ type.libelle }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ path('type_show', {'id': type.id}) }}">Afficher</a></li>
+                                <li><a class="dropdown-item" href="{{ path('type_edit', {'id': type.id}) }}">Modifier</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="text-center" colspan="3">Aucun résultat trouvé..</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

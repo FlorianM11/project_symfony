@@ -20,6 +20,11 @@ class Property
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Type::class)
      * @ORM\JoinColumn(nullable=false)
      */
@@ -55,6 +60,11 @@ class Property
     public function __construct()
     {
         $this->leases = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getReference();
     }
 
     public function getId(): ?int
@@ -148,6 +158,18 @@ class Property
                 $lease->setPropertyId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

@@ -1,0 +1,12 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}Ajouter un nouveau locataire{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">Ajouter un nouveau locataire</h1>
+
+    <div class="block">
+        {{ include('tenant/_form.html.twig') }}
+    </div>
+
+{% endblock %}

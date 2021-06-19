@@ -1,7 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/app.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
 
-{% block body %}
-<h1>Helloooo</h1>
+{% block content %}
+    <div class="mt-5">
+        <h1 class="text-center">Bienvenue sur<br>Symfony Immobilier</h1>
+        <div class="content-card">
+            <a class="card" href="{{ path('property_index') }}">
+                <i class="far fa-building text-center mb-5"></i>
+                <h2 class="text-center">Ajouter les biens et propriétés que vous détenez pour les gérer.</h2>
+            </a>
+            <a class="card" href="{{ path('tenant_index') }}">
+                <i class="far fa-user text-center mb-5"></i>
+                <h2 class="text-center">Ajouter vos locataires pour les associé a vos bien.</h2>
+            </a>
+        </div>
+        <p class="text-center mt-5">Mais commencez par ajouter <a href="{{ path('type_index') }}">vos types de bien</a> et <a href="{{ path('address_index') }}">vos adresses</a>.</p>
+    </div>
+
 {% endblock %}

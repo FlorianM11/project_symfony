@@ -43,9 +43,14 @@ class Tenant
     private $dateOfBirth;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Lease::class, inversedBy="tenant_id")
+     * @ORM\ManyToOne(targetEntity=Lease::class, inversedBy="tenants")
      */
     private $lease;
+
+    public function __toString(): string
+    {
+        return $this->getLastName() . ' ' . $this->getFirstName();
+    }
 
     public function getId(): ?int
     {

@@ -1,0 +1,56 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}Mes biens{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center mb-5 justify-content-between">
+        <h1>Mes biens</h1>
+        <a class="btn btn-primary" href="{{ path('property_new') }}">Ajouter un bien</a>
+    </div>
+
+    <div class="block">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Référence</th>
+                <th>Surface (en m2)</th>
+                <th>Loyer (en €)</th>
+                <th>Adresse</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for property in properties %}
+                <tr>
+                    <td>{{ property.id }}</td>
+                    <td>{{ property.reference }}</td>
+                    <td>{{ property.area }}</td>
+                    <td>{{ property.address }}</td>
+                    <td>{{ property.type }}</td>
+                    <td>{{ property.rent }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ path('property_show', {'id': property.id}) }}">Afficher</a></li>
+                                <li><a class="dropdown-item" href="{{ path('property_edit', {'id': property.id}) }}">Modifier</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">Aucun résultat trouvé..</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}

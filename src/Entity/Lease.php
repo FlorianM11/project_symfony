@@ -30,20 +30,21 @@ class Lease
     private $endDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tenant::class, mappedBy="lease")
+     * @ORM\OneToMany (targetEntity=Tenant::class, mappedBy="Lease")
      */
-    private $tenant_id;
+    private $tenants;
 
     /**
      * @ORM\ManyToOne(targetEntity=Property::class, inversedBy="leases")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $property_id;
+    private $property;
 
     public function __construct()
     {
-        $this->tenant_id = new ArrayCollection();
+        $this->tenants = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -77,42 +78,43 @@ class Lease
     /**
      * @return Collection|Tenant[]
      */
-    public function getTenantId(): Collection
+    public function getTenants(): Collection
     {
-        return $this->tenant_id;
+        return $this->tenants;
     }
 
-    public function addTenantId(Tenant $tenantId): self
+    public function addTenant(Tenant $tenant): self
     {
-        if (!$this->tenant_id->contains($tenantId)) {
-            $this->tenant_id[] = $tenantId;
-            $tenantId->setLease($this);
+        if (!$this->tenants->contains($tenant)) {
+            $this->tenants[] = $tenant;
+            $tenant->setLease($this);
         }
 
         return $this;
     }
 
-    public function removeTenantId(Tenant $tenantId): self
+    public function removeTenant(Tenant $tenant): self
     {
-        if ($this->tenant_id->removeElement($tenantId)) {
+        if ($this->tenants->removeElement($tenant)) {
             // set the owning side to null (unless already changed)
-            if ($tenantId->getLease() === $this) {
-                $tenantId->setLease(null);
+            if ($tenant->getLease() === $this) {
+                $tenant->setLease(null);
             }
         }
 
         return $this;
     }
 
-    public function getPropertyId(): ?Property
+    public function getProperty(): ?Property
     {
-        return $this->property_id;
+        return $this->property;
     }
 
-    public function setPropertyId(?Property $property_id): self
+    public function setProperty(?Property $property): self
     {
-        $this->property_id = $property_id;
+        $this->property = $property;
 
         return $this;
     }
+
 }
