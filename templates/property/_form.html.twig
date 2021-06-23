@@ -4,8 +4,12 @@
         {{ form_row(form.rent, { 'label': 'Loyer (en €)' }) }}
         {{ form_row(form.type, { 'label': 'Type' }) }}
         {{ form_row(form.address, { 'label': 'Adresse' }) }}
-    <div class="buttons">
-        <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+    <div class="buttons mt-5">
+        {% if show is not defined %}
+            <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        {% else %}
+            <a class="btn btn-primary" href="{{ path('property_edit', {'id': property.id}) }}">Modifier</a>
+        {% endif %}
         <a class="btn btn-secondary" href="{{ path('property_index') }}">Retour</a>
     </div>
 

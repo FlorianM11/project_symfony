@@ -60,7 +60,9 @@ class PropertyController extends AbstractController
      */
     public function show(Property $property): Response
     {
+        $form = $this->createForm(PropertyType::class, $property, ['disabled' => true, 'required' => false]);
         return $this->render('property/show.html.twig', [
+            'form' => $form->createView(),
             'property' => $property,
         ]);
     }

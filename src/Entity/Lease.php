@@ -30,7 +30,7 @@ class Lease
     private $endDate;
 
     /**
-     * @ORM\OneToMany (targetEntity=Tenant::class, mappedBy="Lease")
+     * @ORM\OneToMany (targetEntity=Tenant::class, mappedBy="lease")
      */
     private $tenants;
 

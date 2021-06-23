@@ -14,17 +14,21 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>StartDate</th>
-                    <th>EndDate</th>
-                    <th>actions</th>
+                    <th>Bien</th>
+                    <th>Locataire(s)</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for lease in leases %}
                 <tr>
                     <td>{{ lease.id }}</td>
-                    <td>{{ lease.startDate ? lease.startDate|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ lease.endDate ? lease.endDate|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ lease.property }}</td>
+                    <td>{{ lease.tenants|join(',') }}</td>
+                    <td>{{ lease.startDate ? lease.startDate|date('d/m/Y') : '' }}</td>
+                    <td>{{ lease.endDate ? lease.endDate|date('d/m/Y') : 'Pas défini' }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
