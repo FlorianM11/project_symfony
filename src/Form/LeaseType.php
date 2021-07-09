@@ -26,6 +26,7 @@ class LeaseType extends AbstractType
             ->add('tenants', EntityType::class, [
                 'mapped' => false,
                 'class' => Tenant::class,
+                'attr' => ['class' => 'select-2'],
                 'multiple' => true,
             ])
         ;

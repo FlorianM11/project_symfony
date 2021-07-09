@@ -53,7 +53,9 @@ class TypeController extends AbstractController
      */
     public function show(Type $type): Response
     {
+        $form = $this->createForm(TypeType::class, $type, ['disabled' => true, 'required' => false]);
         return $this->render('type/show.html.twig', [
+            'form' => $form->createView(),
             'type' => $type,
         ]);
     }

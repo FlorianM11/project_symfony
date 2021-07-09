@@ -1,4 +1,22 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.startDate, { 'label': 'Date de début' }) }}
+    {{ form_row(form.endDate, { 'label': 'Date de fin' }) }}
+    {{ form_row(form.property, { 'label': 'Bien' }) }}
+    {{ form_row(form.tenants, { 'label': 'Locataire(s)'}) }}
+
+    <div class="buttons mt-5">
+        {% if show == false %}
+            <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        {% else %}
+            <a class="btn btn-primary" href="{{ path('lease_edit', {'id': lease.id}) }}">Modifier</a>
+        {% endif %}
+        <a class="btn btn-secondary" href="{{ path('lease_index') }}">Retour</a>
+    </div>
+
 {{ form_end(form) }}
+
+<script>
+    $(document).ready(function() {
+        $('select[multiple]').select2();
+    });
+</script>

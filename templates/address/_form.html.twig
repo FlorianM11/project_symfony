@@ -1,11 +1,15 @@
 {{ form_start(form) }}
 
-    {{ form_row(form.address) }}
-    {{ form_row(form.postalCode) }}
-    {{ form_row(form.city) }}
+    {{ form_row(form.address, {'label': 'Adresse'}) }}
+    {{ form_row(form.postalCode, {'label': 'Code postale'}) }}
+    {{ form_row(form.city, {'label': 'Ville'}) }}
 
-    <div class="buttons">
-        <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+    <div class="buttons mt-5">
+        {% if show == false %}
+            <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        {% else %}
+            <a class="btn btn-primary" href="{{ path('address_edit', {'id': address.id}) }}">Modifier</a>
+        {% endif %}
         <a class="btn btn-secondary" href="{{ path('address_index') }}">Retour</a>
     </div>
 

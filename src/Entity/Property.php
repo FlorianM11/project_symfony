@@ -53,7 +53,7 @@ class Property
     private $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity=Lease::class, mappedBy="property_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Lease::class, mappedBy="property", orphanRemoval=true)
      */
     private $leases;
 
@@ -154,8 +154,8 @@ class Property
     {
         if ($this->leases->removeElement($lease)) {
             // set the owning side to null (unless already changed)
-            if ($lease->getPropertyId() === $this) {
-                $lease->setPropertyId(null);
+            if ($lease->getProperty() === $this) {
+                $lease->setProperty(null);
             }
         }
 

@@ -32,6 +32,8 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{ path('property_show', {'id': property.id}) }}">Afficher</a></li>
                                 <li><a class="dropdown-item" href="{{ path('property_edit', {'id': property.id}) }}">Modifier</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>{{ include('property/_delete_form.html.twig') }}</li>
                             </ul>
                         </div>
                     </td>

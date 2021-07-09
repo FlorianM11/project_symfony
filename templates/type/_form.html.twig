@@ -1,8 +1,13 @@
 {{ form_start(form) }}
-    {{ form_row(form.libelle) }}
+    {{ form_row(form.libelle, {'label': 'Type'}) }}
+    {{ form_row(form.isFurniture, {'label': 'Meublé'}) }}
 
     <div class="buttons mt-5">
-        <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        {% if show == false %}
+            <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        {% else %}
+            <a class="btn btn-primary" href="{{ path('type_edit', {'id': type.id}) }}">Modifier</a>
+        {% endif %}
         <a class="btn btn-secondary" href="{{ path('type_index') }}">Retour</a>
     </div>
 

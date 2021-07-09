@@ -5,8 +5,12 @@
     {{ form_row(form.phone, { 'label': 'Numéro de téléphone' }) }}
     {{ form_row(form.dateOfBirth, { 'label': 'Date de naissance' }) }}
 
-    <div class="buttons">
-        <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+    <div class="buttons mt-5">
+        {% if show == false %}
+            <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+        {% else %}
+            <a class="btn btn-primary" href="{{ path('tenant_edit', {'id': tenant.id}) }}">Modifier</a>
+        {% endif %}
         <a class="btn btn-secondary" href="{{ path('tenant_index') }}">Retour</a>
     </div>
 

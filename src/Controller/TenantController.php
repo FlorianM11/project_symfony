@@ -53,7 +53,9 @@ class TenantController extends AbstractController
      */
     public function show(Tenant $tenant): Response
     {
+        $form = $this->createForm(TenantType::class, $tenant, ['disabled' => true, 'required' => false]);
         return $this->render('tenant/show.html.twig', [
+            'form' => $form->createView(),
             'tenant' => $tenant,
         ]);
     }

@@ -4,15 +4,13 @@
 {% block home %}
     <div class="grid-body">
         <div class="header-menu">
-            <h1 class="text-center mb-5 p-3">Symfony Immobillier</h1>
+            <h2 class="text-center mb-5 p-3">Symfony Immobillier</h2>
             <ul>
                 <li class="{{ 'home' in route ? 'active' }}"><a href="{{ path('home') }}"><i class="fas fa-home item-right"></i> Accueil</a></li>
                 <li class="{{ 'property' in route ? 'active' }}"><a href="{{ path('property_index') }}"><i class="far fa-building item-right"></i> Mes biens</a></li>
                 <li class="{{ 'tenant' in route ? 'active' }}"><a href="{{ path('tenant_index') }}"><i class="far fa-user item-right"></i> Mes locataires</a></li>
                 <li class="{{ 'lease' in route ? 'active' }}"><a href="{{ path('lease_index') }}"><i class="fas fa-house-user item-right"></i> Mes locations</a></li>
-            </ul>
-
-            <ul class="bottom-menu">
+                <li><hr class="divider"></li>
                 <li class="{{ 'type' in route ? 'active' }}"><a href="{{ path('type_index') }}"><i class="fas fa-quote-right item-right"></i> Mes types</a></li>
                 <li class="{{ 'address' in route ? 'active' }}"><a href="{{ path('address_index') }}"><i class="fas fa-map-marker-alt item-right"></i> Mes adresses</a></li>
             </ul>

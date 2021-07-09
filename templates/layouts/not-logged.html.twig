@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% set route = app.request.attributes.get('_route') %}
+
+{% block home %}
+    <div class="h-100 d-flex align-items-center">
+        <div class="w-100 mb-5">
+            {% block title_content %}{% endblock %}
+            <div class="block m-auto mb-5 pb-3" style="width: 30%">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

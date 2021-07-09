@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Lease;
 use App\Form\LeaseType;
+use App\Manager\LeaseManager;
 use App\Repository\LeaseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,7 +60,12 @@ class LeaseController extends AbstractController
      */
     public function show(Lease $lease): Response
     {
+        $form = $this->createForm(LeaseType::class, $lease, ['disabled' => true, 'required' => false]);
+
+        $form->get('tenants')->setData($lease->getTenants());
+
         return $this->render('lease/show.html.twig', [
+            'form' => $form->createView(),
             'lease' => $lease,
         ]);
     }
@@ -67,16 +73,19 @@ class LeaseController extends AbstractController
     /**
      * @Route("/{id}/edit", name="lease_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Lease $lease): Response
+    public function edit(Request $request, Lease $lease, LeaseManager $leaseManager): Response
     {
         $form = $this->createForm(LeaseType::class, $lease);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $leaseManager->setTenants($lease, $form);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('lease_index');
         }
+
+        $form->get('tenants')->setData($lease->getTenants());
 
         return $this->render('lease/edit.html.twig', [
             'lease' => $lease,

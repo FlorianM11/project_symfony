@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TenantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,9 +45,14 @@ class Tenant
     private $dateOfBirth;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Lease::class, inversedBy="tenants")
+     * @ORM\ManyToMany(targetEntity=Lease::class, inversedBy="tenants")
      */
-    private $lease;
+    private $leases;
+
+    public function __construct()
+    {
+        $this->leases = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -117,15 +124,28 @@ class Tenant
         return $this;
     }
 
-    public function getLease(): ?Lease
+    /**
+     * @return Collection|Lease[]
+     */
+    public function getLeases(): Collection
     {
-        return $this->lease;
+        return $this->leases;
     }
 
-    public function setLease(?Lease $lease): self
+    public function addLease(Lease $lease): self
     {
-        $this->lease = $lease;
+        if (!$this->leases->contains($lease)) {
+            $this->leases[] = $lease;
+        }
 
         return $this;
     }
+
+    public function removeLease(Lease $lease): self
+    {
+        $this->leases->removeElement($lease);
+
+        return $this;
+    }
+
 }

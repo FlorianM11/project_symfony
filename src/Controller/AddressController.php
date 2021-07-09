@@ -53,7 +53,19 @@ class AddressController extends AbstractController
      */
     public function show(Address $address): Response
     {
+        $form = $this->createForm(AddressType::class, $address, ['disabled' => true, 'required' => false]);
         return $this->render('address/show.html.twig', [
+            'form' => $form->createView(),
+            'address' => $address,
+        ]);
+    }
+
+    /**
+     * @Route("{id}/see-on-map", name="address_see_on_map", methods={"GET"})
+     */
+    public function seeOnMap(Address $address): Response
+    {
+        return $this->render('address/see-on-map.html.twig', [
             'address' => $address,
         ]);
     }

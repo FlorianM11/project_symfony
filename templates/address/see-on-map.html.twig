@@ -1,0 +1,55 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="d-flex align-items-center mb-5 justify-content-between">
+        <h1>Adresse : {{ address }}</h1>
+    </div>
+
+    <div class="block">
+        <div id="map" style="width: 100%; height: 500px;"></div>
+    </div>
+
+    <script src="https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js"></script>
+    <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZmxvcmlhbjgxMTEwIiwiYSI6ImNrcW5laGRhOTBienUybm5wanN5NTVxb2YifQ.6IRkjDx5Z7iGlIHFnm2URw';
+        var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+        mapboxClient.geocoding
+            .forwardGeocode({
+                query: "{{ address }}",
+                autocomplete: false,
+                limit: 1
+            })
+            .send()
+            .then(function (response) {
+                if (
+                    response &&
+                    response.body &&
+                    response.body.features &&
+                    response.body.features.length
+                ) {
+                    var feature = response.body.features[0];
+
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/streets-v11',
+                        center: feature.center,
+                        zoom: 12
+                    });
+
+// Create a marker and add it to the map.
+                    new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+                }
+            });
+    </script>
+{% endblock %}

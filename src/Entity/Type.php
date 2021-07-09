@@ -22,6 +22,11 @@ class Type
      */
     private $libelle;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFurniture;
+
     public function __toString()
     {
         return $this->getLibelle();
@@ -40,6 +45,18 @@ class Type
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getIsFurniture(): ?bool
+    {
+        return $this->isFurniture;
+    }
+
+    public function setIsFurniture(bool $isFurniture): self
+    {
+        $this->isFurniture = $isFurniture;
 
         return $this;
     }

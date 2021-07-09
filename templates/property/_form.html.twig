@@ -5,7 +5,7 @@
         {{ form_row(form.type, { 'label': 'Type' }) }}
         {{ form_row(form.address, { 'label': 'Adresse' }) }}
     <div class="buttons mt-5">
-        {% if show is not defined %}
+        {% if show == false %}
             <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
         {% else %}
             <a class="btn btn-primary" href="{{ path('property_edit', {'id': property.id}) }}">Modifier</a>

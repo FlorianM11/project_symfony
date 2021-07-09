@@ -14,6 +14,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Libelle</th>
+                    <th>Meublé</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -22,6 +23,7 @@
                 <tr>
                     <td>{{ type.id }}</td>
                     <td>{{ type.libelle }}</td>
+                    <td>{{ type.isFurniture ? 'Oui' : 'Non' }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,6 +32,8 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{ path('type_show', {'id': type.id}) }}">Afficher</a></li>
                                 <li><a class="dropdown-item" href="{{ path('type_edit', {'id': type.id}) }}">Modifier</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>{{ include('type/_delete_form.html.twig') }}</li>
                             </ul>
                         </div>
                     </td>

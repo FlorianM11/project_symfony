@@ -30,7 +30,7 @@ class Lease
     private $endDate;
 
     /**
-     * @ORM\OneToMany (targetEntity=Tenant::class, mappedBy="lease")
+     * @ORM\ManyToMany (targetEntity=Tenant::class, mappedBy="leases")
      */
     private $tenants;
 
@@ -75,6 +75,18 @@ class Lease
         return $this;
     }
 
+    public function getProperty(): ?Property
+    {
+        return $this->property;
+    }
+
+    public function setProperty(?Property $property): self
+    {
+        $this->property = $property;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Tenant[]
      */
@@ -87,7 +99,7 @@ class Lease
     {
         if (!$this->tenants->contains($tenant)) {
             $this->tenants[] = $tenant;
-            $tenant->setLease($this);
+            $tenant->addLease($this);
         }
 
         return $this;
@@ -96,23 +108,8 @@ class Lease
     public function removeTenant(Tenant $tenant): self
     {
         if ($this->tenants->removeElement($tenant)) {
-            // set the owning side to null (unless already changed)
-            if ($tenant->getLease() === $this) {
-                $tenant->setLease(null);
-            }
+            $tenant->removeLease($this);
         }
-
-        return $this;
-    }
-
-    public function getProperty(): ?Property
-    {
-        return $this->property;
-    }
-
-    public function setProperty(?Property $property): self
-    {
-        $this->property = $property;
 
         return $this;
     }

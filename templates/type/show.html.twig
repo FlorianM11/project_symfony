@@ -3,24 +3,10 @@
 {% block title %}Type{% endblock %}
 
 {% block content %}
-    <h1>Type</h1>
+    <h1>Afficher le type</h1>
+    <div class="block">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ type.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ type.libelle }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('type_index') }}">back to list</a>
-
-    <a href="{{ path('type_edit', {'id': type.id}) }}">edit</a>
-
-    {{ include('type/_delete_form.html.twig') }}
+        {% set show = true %}
+        {{ include('type/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
 {% endblock %}

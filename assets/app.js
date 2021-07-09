@@ -8,8 +8,12 @@
 
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
-import 'jquery';
+const $ = require('jquery');
 import 'bootstrap';
+
+//select2
+import 'select2/dist/js/select2.full.min';
+import 'select2/dist/js/i18n/fr';
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './scss/app.scss';
